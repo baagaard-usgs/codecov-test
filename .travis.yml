@@ -6,13 +6,12 @@ services:
 
 language: cpp
 
-# :TODO: @brad Add osx build (need homebrew packages)..
 matrix:
   include:
     - os: linux
-      env: BASE_IMAGE=baagaard/geomodelgrids-testenv-debian-stable-gcc8
+      env: BASE_IMAGE=baagaard/codecov-testenv-debian-stable-gcc8
     - os: linux
-      env: BASE_IMAGE=baagaard/geomodelgrids-testenv-debian-testing-gcc9
+      env: BASE_IMAGE=baagaard/codecov-testenv-debian-testing-gcc9
 
 
 addons:
@@ -27,8 +26,9 @@ git:
 
 
 install:
-  - docker build -t geomodelgrids-testenv --build-arg BASE_IMAGE=$BASE_IMAGE --target src -f docker/geomodelgrids-testenv .
+  - docker build -t codecov-testenv --build-arg BASE_IMAGE=$BASE_IMAGE --target src -f docker/codecov-testenv .
 
 
-script:
-  - docker run geomodelgrids-testenv /bin/bash -c "make -j$(nproc) install && make -j$(nproc) check VERBOSE=1"
+script
+  - ci_env=`bash <(curl -s https://codecov.io/env)`
+  - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc"
