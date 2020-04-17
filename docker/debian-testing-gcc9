@@ -1,0 +1,26 @@
+FROM debian:testing as os-update
+MAINTAINER Brad Aagaard <baagaard@usgs.gov>
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        g++ \
+        make \
+        file \
+        automake \
+        autoconf \
+        libtool \
+        curl \
+        git \
+        ca-certificates \
+        libcppunit-dev \
+        lcov \
+        vim-common \
+        vim-runtime \
+        vim-nox
+
+COPY certs/ /usr/local/share/ca-certificates
+RUN update-ca-certificates
+
+RUN apt-get clean
+
+CMD /bin/bash
