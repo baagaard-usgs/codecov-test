@@ -8,8 +8,8 @@ language: cpp
 
 matrix:
   include:
-    - os: linux
-      env: BASE_IMAGE=baagaard/codecov-testenv-debian-stable-gcc8
+#    - os: linux
+#      env: BASE_IMAGE=baagaard/codecov-testenv-debian-stable-gcc8
     - os: linux
       env: BASE_IMAGE=baagaard/codecov-testenv-debian-testing-gcc9
 
@@ -31,4 +31,5 @@ install:
 
 script:
   - ci_env=`bash <(curl -s https://codecov.io/env)`
-  - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc"
+  - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc && bash <(curl -s https://codecov.io/bash) -X gcov -f coverage.info -F libsrc -y ~/src/ci-
+config/codecov.yml"
