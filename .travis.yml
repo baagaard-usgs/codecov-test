@@ -8,10 +8,10 @@ language: cpp
 
 matrix:
   include:
-#    - os: linux
-#      env: BASE_IMAGE=baagaard/codecov-testenv-debian-stable-gcc8
     - os: linux
       env: BASE_IMAGE=baagaard/codecov-testenv-debian-testing-gcc9
+#    - os: linux
+#      env: BASE_IMAGE=baagaard/codecov-testenv-debian-stable-gcc8
 
 
 addons:
