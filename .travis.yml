@@ -29,6 +29,6 @@ install:
   - docker build -t codecov-testenv --build-arg BASE_IMAGE=$BASE_IMAGE --target src -f docker/codecov-testenv .
 
 
-script
+script:
   - ci_env=`bash <(curl -s https://codecov.io/env)`
   - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc"
