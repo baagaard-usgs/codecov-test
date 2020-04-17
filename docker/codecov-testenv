@@ -1,0 +1,32 @@
+# docker build --build-arg BASE_IMAGE=${VARIABLE_NAME} -f DOCKERFILE . -t IMAGE_NAME .
+
+
+ARG BASE_IMAGE
+from ${BASE_IMAGE} as src
+MAINTAINER Brad Aagaard <baagaard@usgs.gov>
+
+ENV TEST_USER test-user
+RUN useradd --create-home --shell /bin/bash $TEST_USER
+
+USER ${TEST_USER}
+
+ENV TEST_HOME /home/${TEST_USER}
+ENV BUILD_DIR ${TEST_HOME}/build
+ENV SRC_DIR ${TEST_HOME}/src
+
+COPY --chown=test-user:test-user . ${SRC_DIR}
+WORKDIR ${SRC_DIR}
+RUN autoreconf --install --verbose --force
+
+RUN mkdir -p ${BUILD_DIR}
+WORKDIR ${BUILD_DIR}
+RUN ${SRC_DIR}/configure LDFLAGS="--coverage"  CXXFLAGS="-g --coverage"
+
+
+# TESTING ----------
+from src as test
+
+RUN make && make check VERBOSE=1
+RUN make coverage-libsrc
+
+CMD /bin/bash

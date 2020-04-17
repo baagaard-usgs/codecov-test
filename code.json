@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "measurementType": {},
+  "agency": "U.S. Department of Interior",
+  "releases": [
+    {
+        "name": "codecov-test",
+        "description": "Test uploading code coverage to codecov.io",
+        "version": "v0.1.0",
+        "status": "??",
+        "organization": "U.S. Geological Survey",
+        "vcs": "git",
+        "repositoryUrl": "https://github.com/baagaard-usgs/codecov-test.git",
+        "homepageURL": "https://baagaard-usgs.github.io/codecov-test/",
+        "downloadURL": "https://github.com/baagaard-usgs/codecov-test/releases/tag/v1.0.0",
+        "disclaimerURL": "https://github.com/baagaard-usgs/codecov-test/blob/master/DISCLAIMER.md",
+        "permissions": {
+            "licenses": [
+                {
+                    "name": "Public Domain, CC0-1.0",
+                    "URL": "https://github.com/baagaard-usgs/codecov-test/blob/master/LICENSE.md"
+                }
+            ],
+            "usageType": "openSource",
+            "exemptionText": null
+        },
+        "laborHours": null,
+        "languages": [
+            "C++"
+        ],
+        "tags": [
+            "code coverage",
+        ],
+        "contact": {
+            "name": "Brad Aagaard",
+            "email": "baagaard@usgs.gov"
+        },
+        "date": {
+            "metadataLastUpdated": "2020-04-17"
+        }
+    }
+  ]
+}
