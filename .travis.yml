@@ -32,4 +32,4 @@ install:
 script:
   - ci_env=`bash <(curl -s https://codecov.io/env)`
   - echo $ci_env
-  - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc && cd ../src && bash ci-config/codecov.bash -X gcov -f ../build/coverage.info -F libsrc -y ci-config/codecov.yml -v"
+  - docker run $ci_env codecov-testenv /bin/bash -c "make && make check VERBOSE=1 && make coverage-libsrc && cd ../src && bash <(curl -s https://codecov.io/bash) -X gcov -f ../build/coverage.info -F libsrc -y ci-config/codecov.yml -v"
