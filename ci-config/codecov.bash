@@ -42,6 +42,7 @@ ft_gcovout="1"
 
 _git_root=$(git rev-parse --show-toplevel 2>/dev/null || hg root 2>/dev/null || echo $PWD)
 git_root="$_git_root"
+echo "GIT ROOT $_git_root"
 codecov_yml=""
 remote_addr=""
 if [ "$git_root" = "$PWD" ];
@@ -1597,8 +1598,8 @@ then
   cat $upload_file
 else
 
-  say "${e}==>${x} Gzipping contents"
-  gzip -nf9 $upload_file
+  #say "${e}==>${x} Gzipping contents"
+  #gzip -nf9 $upload_file
 
   query=$(echo "${query}" | tr -d ' ')
   say "${e}==>${x} Uploading reports"
